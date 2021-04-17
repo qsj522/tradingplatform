@@ -2514,15 +2514,6 @@ ul.menu_r li a:hover, ul.menu_r li a.now {
 }
 
 /*---------------登录、注册---------------*/
-.log_bg {
-    width: 100%;
-    min-width: 1200px;
-    height: 700px;
-    overflow: hidden;
-    /*background: url(../images/log_bg.jpg);*/
-    animation: Yui 18s ease-in 2s infinite alternate;
-}
-
 .log_top {
     height: 90px;
     width: 100%;
@@ -2553,36 +2544,6 @@ ul img {
     height: 425px;
 }
 
-/*.container {*/
-/*    width: 611px;*/
-/*    height: 425px;*/
-/*    overflow: hidden;*/
-/*    float: left;*/
-/*    margin-top: 40px;*/
-/*    animation: Yui 9s ease-in 2s infinite alternate;*/
-/*}*/
-
-@keyframes Yui {
-    0% {
-        background: url(../images/logbg1.png);
-    }
-    20% {
-        background: url(../images/logbg2.png);
-    }
-    40% {
-        background: url(../images/logbg3.png);
-    }
-    60% {
-        background: url(../images/logbg4.png);
-    }
-    80% {
-        background: url(../images/logbg5.png);
-    }
-    100% {
-          background: url(../images/logbg6.png);
-      }
-}
-
 .log_img {
     width: 611px;
     height: 425px;
@@ -2598,7 +2559,7 @@ ul img {
     background-color: #ffffff;
     float: right;
     display: inline;
-    margin-top: 40px;
+    margin-top: 60px;
     margin-right: 10px;
     margin-bottom: 10px;
     -webkit-box-shadow: 0 0 5px #e0e0e0;

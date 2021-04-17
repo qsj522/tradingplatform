@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:include="common.html :: source"></th:block>
-    <link rel="shortcut icon" href="favicon1.ico"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="favicon.ico">
     <link rel="stylesheet" href="layui/css/layui.css" media="all"/>
 </head>
 <body>
@@ -68,38 +68,6 @@
             , width: '100%'
             , height: '800px'
             , interval: 3000
-        });
-        var $ = layui.$, active = {
-            set: function (othis) {
-                var THIS = 'layui-bg-normal'
-                    , key = othis.data('key')
-                    , options = {};
-
-                othis.css('background-color', '#5FB878').siblings().removeAttr('style');
-                options[key] = othis.data('value');
-                ins3.reload(options);
-            }
-        };
-        //监听开关
-        form.on('switch(autoplay)', function () {
-            ins3.reload({
-                autoplay: this.checked
-            });
-        });
-
-        $('.demoSet').on('keyup', function () {
-            var value = this.value
-                , options = {};
-            if (!/^\d+$/.test(value)) return;
-
-            options[this.name] = value;
-            ins3.reload(options);
-        });
-
-        //其它示例
-        $('.demoTest .layui-btn').on('click', function () {
-            var othis = $(this), type = othis.data('type');
-            active[type] ? active[type].call(this, othis) : '';
         });
     });
 </script>
