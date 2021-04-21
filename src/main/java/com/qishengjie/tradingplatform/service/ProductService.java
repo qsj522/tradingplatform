@@ -27,6 +27,8 @@ public interface ProductService extends IService<Product> {
 
      List<Product> findByCategoryId(String type, Integer categoryId);
 
+     String saveBatch(Product product);
+
     /**
      * 后台管理系统返回商品数据
      */

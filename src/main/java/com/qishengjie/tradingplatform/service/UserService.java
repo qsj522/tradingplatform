@@ -27,4 +27,6 @@ public interface UserService extends IService<User> {
 
     //退出
     String logout(HttpSession session);
+
+    ModelAndView updateUserInfo(User user,HttpSession session);
 }

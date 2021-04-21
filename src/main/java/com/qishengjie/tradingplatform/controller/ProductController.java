@@ -2,6 +2,7 @@ package com.qishengjie.tradingplatform.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.qishengjie.tradingplatform.entity.Product;
 import com.qishengjie.tradingplatform.entity.User;
 import com.qishengjie.tradingplatform.service.ProductCategoryService;
 import com.qishengjie.tradingplatform.service.ProductService;
@@ -56,6 +57,11 @@ public class ProductController {
     @ResponseBody
     public TableDataVO<TableProductVO> findAllTableProduct(Integer page, Integer limit) {
         return productService.findAllTableData(page, limit);
+    }
+
+    @PostMapping("/save")
+    public String save(Product product){
+         return productService.saveBatch(product);
     }
 
 }

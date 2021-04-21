@@ -98,6 +98,18 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
+    public String saveBatch(Product product){
+        Boolean resultStatus = save(product);
+        String result = "";
+        if (resultStatus){
+            result = "操作成功！";
+        }else {
+            result = "操作失败！请检查商品是否符合标准。";
+        }
+        return result;
+    }
+
+    @Override
     public TableDataVO<TableProductVO> findAllTableData(Integer page, Integer limit) {
         IPage<Product> productIPage = new Page<>(page,limit);
         IPage<Product> result = productMapper.selectPage(productIPage,null);

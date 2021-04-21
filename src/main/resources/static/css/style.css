@@ -2715,6 +2715,23 @@ ul img {
     border-radius: 5px;
 }
 
+.upd_c {
+    width: 475px;
+    height: 530px;
+    overflow: hidden;
+    background-color: #FFF;
+    display: inline;
+    margin-top: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 5px #e0e0e0;
+    -moz-box-shadow: 0 0 5px #e0e0e0;
+    box-shadow: 0 0 5px #e0e0e0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
 /*---------------分类页面---------------*/
 ul.cate {
     width: 105%;

@@ -68,5 +68,10 @@ public class UserController {
     public ModelAndView userInfo(HttpSession session) {
         return userService.userInfo(session);
     }
+
+    @PostMapping("/update")
+    public ModelAndView update(User user,HttpSession session) {
+        return userService.updateUserInfo(user,session);
+    }
 }
 
