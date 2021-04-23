@@ -2,6 +2,9 @@ package com.qishengjie.tradingplatform.mapper;
 
 import com.qishengjie.tradingplatform.entity.ProductCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.qishengjie.tradingplatform.vo.LevelOneVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-04-10
  */
 public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
+    List<ProductCategory> getLevelOne();
 
+    List<ProductCategory> getLevelTwo(String parentId);
 }

@@ -2,6 +2,7 @@ package com.qishengjie.tradingplatform.service;
 
 import com.qishengjie.tradingplatform.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qishengjie.tradingplatform.vo.ResultVO;
 import com.qishengjie.tradingplatform.vo.TableDataVO;
 import com.qishengjie.tradingplatform.vo.TableProductVO;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +28,7 @@ public interface ProductService extends IService<Product> {
 
      List<Product> findByCategoryId(String type, Integer categoryId);
 
-     String saveBatch(Product product);
+    ResultVO saveBatch(Product product, HttpSession session) ;
 
     /**
      * 后台管理系统返回商品数据

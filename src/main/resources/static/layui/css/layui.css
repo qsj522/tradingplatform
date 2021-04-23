@@ -2168,6 +2168,7 @@ a cite {
 }
 
 .layui-form-item {
+    margin-top: 10px;
     margin-bottom: 15px;
     clear: both;
     *zoom: 1
@@ -2216,12 +2217,16 @@ a cite {
 
 .layui-form-item .layui-input-inline {
     float: left;
-    width: 190px;
+    width: 500px;
     margin-right: 10px
 }
 
 .layui-form-text .layui-input-inline {
-    width: auto
+    width: 400px;
+}
+
+.layui-form-select .layui-input-inline {
+    width: 190px;
 }
 
 .layui-form-mid {

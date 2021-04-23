@@ -6,6 +6,7 @@ import com.qishengjie.tradingplatform.entity.Product;
 import com.qishengjie.tradingplatform.entity.User;
 import com.qishengjie.tradingplatform.service.ProductCategoryService;
 import com.qishengjie.tradingplatform.service.ProductService;
+import com.qishengjie.tradingplatform.vo.ResultVO;
 import com.qishengjie.tradingplatform.vo.TableDataVO;
 import com.qishengjie.tradingplatform.vo.TableProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,9 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(Product product){
-         return productService.saveBatch(product);
+    @ResponseBody
+    public ResultVO save(Product product, HttpSession session) {
+         return productService.saveBatch(product,session);
     }
 
 }

@@ -8,6 +8,7 @@ import com.qishengjie.tradingplatform.mapper.ProductCategoryMapper;
 import com.qishengjie.tradingplatform.mapper.ProductMapper;
 import com.qishengjie.tradingplatform.service.ProductCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.qishengjie.tradingplatform.vo.LevelOneVO;
 import com.qishengjie.tradingplatform.vo.ProductCategoryVO;
 import com.qishengjie.tradingplatform.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -90,5 +93,21 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
             }
         }
         return levelOneVO;
+    }
+
+    @Override
+    public Object getLevelOne() {
+        Map selectMap = new HashMap();
+        List<ProductCategory> productCategoryList = productCategoryMapper.getLevelOne();
+        selectMap.put("data",productCategoryList);
+        return selectMap;
+    }
+
+    @Override
+    public Object getLevelTwo(String parentId) {
+        Map selectMap = new HashMap();
+        List<ProductCategory> productCategoryList = productCategoryMapper.getLevelTwo(parentId);
+        selectMap.put("data",productCategoryList);
+        return selectMap;
     }
 }

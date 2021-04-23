@@ -2,6 +2,7 @@ package com.qishengjie.tradingplatform.service;
 
 import com.qishengjie.tradingplatform.entity.ProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.qishengjie.tradingplatform.vo.LevelOneVO;
 import com.qishengjie.tradingplatform.vo.ProductCategoryVO;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,4 +22,8 @@ public interface ProductCategoryService extends IService<ProductCategory> {
     ModelAndView list(HttpSession session);
 
      List<ProductCategoryVO> getAllProductCategoryVO();
+
+    Object getLevelOne();
+
+    Object getLevelTwo(String parentId);
 }

@@ -3,6 +3,8 @@ package com.qishengjie.tradingplatform.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.qishengjie.tradingplatform.Exception.BussinessException;
 import com.qishengjie.tradingplatform.entity.Product;
 import com.qishengjie.tradingplatform.entity.ProductCategory;
 import com.qishengjie.tradingplatform.entity.User;
@@ -11,12 +13,15 @@ import com.qishengjie.tradingplatform.mapper.ProductMapper;
 import com.qishengjie.tradingplatform.service.ProductCategoryService;
 import com.qishengjie.tradingplatform.service.ProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.qishengjie.tradingplatform.util.UUIDUtils;
+import com.qishengjie.tradingplatform.vo.ResultVO;
 import com.qishengjie.tradingplatform.vo.TableDataVO;
 import com.qishengjie.tradingplatform.vo.TableProductVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -98,13 +103,39 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public String saveBatch(Product product){
-        Boolean resultStatus = save(product);
-        String result = "";
-        if (resultStatus){
-            result = "操作成功！";
+    public ResultVO saveBatch(Product product,HttpSession session) {
+        //添加字段
+        String id = UUIDUtils.getUUID();
+        product.setProductId(id);
+        product.setCategoryLevelThreeId(id);
+        User user = (User)session.getAttribute("user");
+        product.setUserId(user.getUserId());
+        product.setIsTrading(0);
+        Boolean productStatus = save(product);
+        Boolean categoryStatus = false;
+        //分类表添加
+        if (!StringUtils.isEmpty(product.getCategoryLevelTwoId())){
+            ProductCategory entity = new ProductCategory();
+            entity.setId(id);
+            entity.setName(product.getName());
+            entity.setParentId(product.getCategoryLevelTwoId());
+            entity.setType(3);
+            categoryStatus = SqlHelper.retBool(productCategoryMapper.insert(entity));
         }else {
-            result = "操作失败！请检查商品是否符合标准。";
+            log.error("未选择分类或者分类不存在！");
+        }
+        ResultVO result = new ResultVO();
+//        String result = "";
+        if (productStatus && categoryStatus){
+            result.setStatus(0);
+            result.setDesc("添加成功！");
+            result.setHtml("/productCategory/list");
+//            result = "redirect:/productCategory/list";
+        }else {
+            result.setStatus(1);
+            result.setDesc("添加失败，请检查商品内容是否合法");
+            result.setHtml("releaseProduct");
+//            result = "releaseProduct";
         }
         return result;
     }
