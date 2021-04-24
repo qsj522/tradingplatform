@@ -15,6 +15,6 @@ public class ResultVO {
     int status;
     //描述
     String desc;
-    //跳转的网页
-    String html;
+    //地址
+    String url;
 }

@@ -80,11 +80,11 @@
 <script src="layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 <script>
-    layui.use(['form', 'layedit', 'laydate'], function () {
+    let myFile;
+    layui.use(['form', 'upload'], function () {
         var form = layui.form
             , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
+            , upload = layui.upload;
 
         //自定义验证规则
         form.verify({
@@ -99,7 +99,6 @@
                 }
             }
         });
-
         //检查项目添加到下拉框中
         $.ajax({
             url: '/productCategory/getLevelOne',
@@ -139,53 +138,25 @@
                 }
             })
         });
-    });
-
-    //监听提交
-    function submit() {
-        // form.on('button(demo1)', function (data) {
-        $.ajax({
-            type: "POST",
-            url: "/product/save",
-            data: $("#product").serialize(),
-            dataType: "json",
-            success: function (data) {
-                if (data.status === 0) {
-                    layer.msg(data.desc, {icon: 1, time: 4000, shade: 0.4});
-                    window.location.href = data.html;
-                } else {
-                    layer.msg(data.desc, {icon: 2, time: 4000, shade: 0.4});
-                    window.location.href = data.html;
-                }
-                // layer.msg(data.msg,{icon:1,time:3000,shade:0.4},function() {
-                //     window.location.href = data.html;
-                // });
-            },
-        });
-        // return false;
-        // });
-    }
-
-    layui.use('upload', function () {
-        var $ = layui.jquery
-            , upload = layui.upload;
-
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#test1'
-            , url: 'https://httpbin.org/post' //改成您自己的上传接口
+            , url: '/image/save' //改成您自己的上传接口
+            , accept: 'images'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
                     $('#demo1').attr('src', result); //图片链接（base64）
                 });
             }
-            , done: function (res) {
+            , done: function (result) {
+                console.log(result);
                 //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
+                if (result.status === 1) {
+                    alert(layer.msg(result.desc));
                 }
                 //上传成功
+                myFile = result.url;
             }
             , error: function () {
                 //演示失败状态，并实现重传
@@ -197,6 +168,33 @@
             }
         });
     });
+
+    //监听提交
+    function submit() {
+        let myForms = $('#product')[0];
+        let formDatas = new FormData(myForms);
+        formDatas.append("fileName", myFile);
+        console.log(formDatas);
+        $.ajax({
+            type: "POST",
+            url: "/product/save",
+            data: formDatas,
+            dataType: "json",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.status === 0) {
+                    layer.msg(data.desc, {icon: 1, time: 4000, shade: 0.4});
+                    window.location.href = data.url;
+                } else {
+                    layer.msg(data.desc, {icon: 2, time: 4000, shade: 0.4});
+                    window.location.href = data.url;
+                }
+            },
+        });
+    }
+
 </script>
 
 <th:block th:include="common.html :: permit"></th:block>

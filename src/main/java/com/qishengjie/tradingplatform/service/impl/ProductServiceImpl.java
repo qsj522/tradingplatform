@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.qishengjie.tradingplatform.Exception.BussinessException;
 import com.qishengjie.tradingplatform.entity.Product;
 import com.qishengjie.tradingplatform.entity.ProductCategory;
 import com.qishengjie.tradingplatform.entity.User;
@@ -129,12 +128,12 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         if (productStatus && categoryStatus){
             result.setStatus(0);
             result.setDesc("添加成功！");
-            result.setHtml("/productCategory/list");
+            result.setUrl("/productCategory/list");
 //            result = "redirect:/productCategory/list";
         }else {
             result.setStatus(1);
             result.setDesc("添加失败，请检查商品内容是否合法");
-            result.setHtml("releaseProduct");
+            result.setUrl("releaseProduct");
 //            result = "releaseProduct";
         }
         return result;
