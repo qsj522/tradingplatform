@@ -19,6 +19,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public ResultVO saveImg(MultipartFile file) {
         String path = "";
+        String trueFileName = "";
         ResultVO resultVO = new ResultVO();
         if (file != null) {
             String fileName = file.getOriginalFilename();// 文件原名称
@@ -28,7 +29,7 @@ public class ImageServiceImpl implements ImageService {
                     try {
                         path = ResourceUtils.getURL("classpath:").getPath() + "static/images/";
                         // 自定义的文件名称
-                        String trueFileName = System.currentTimeMillis() + "." + type;
+                        trueFileName = System.currentTimeMillis() + "." + type;
                         path += trueFileName;
                         file.transferTo(new File(path));
                     }catch (Exception e){
@@ -54,7 +55,7 @@ public class ImageServiceImpl implements ImageService {
         }
         resultVO.setStatus(0);
         resultVO.setDesc("图片上传成功");
-        resultVO.setUrl(path);
+        resultVO.setUrl(trueFileName);
         return resultVO;
     }
 }

@@ -52,7 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         wrapper.eq("password", password);
         User user = this.baseMapper.selectOne(wrapper);
         if (user == null) {
-            return "login";
+            return "redirect:/login";
         } else {
             session.setAttribute("user", user);
             return "redirect:/productCategory/list";
@@ -73,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public String logout(HttpSession session) {
         session.invalidate();
-        return "login";
+        return "redirect:/login";
     }
 
     @Override

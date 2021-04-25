@@ -24,7 +24,7 @@ public interface ProductService extends IService<Product> {
 
     ModelAndView findByKey(String keyWord,HttpSession session);
 
-    ModelAndView findById(Integer id,HttpSession session);
+    ModelAndView findById(String id,HttpSession session);
 
      List<Product> findByCategoryId(String type, Integer categoryId);
 

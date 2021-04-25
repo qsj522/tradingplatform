@@ -80,7 +80,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public ModelAndView findById(Integer id, HttpSession session) {
+    public ModelAndView findById(String id, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productDetail");
         modelAndView.addObject("product",this.baseMapper.selectById(id));

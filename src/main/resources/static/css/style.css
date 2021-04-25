@@ -768,8 +768,8 @@ ul.menu_r li a:hover, ul.menu_r li a.now {
 }
 
 .content {
-    width: 1070px;
-    margin-left: 165px;
+    width: 1200px;
+    overflow: hidden;
 }
 
 .mar_5 {
@@ -830,7 +830,7 @@ ul.menu_r li a:hover, ul.menu_r li a.now {
 
 .banner .slide_box img {
     text-align: center;
-    height: 420px;
+    /*height: 420px;*/
 }
 
 .banner .slide_info {
@@ -2546,8 +2546,8 @@ li {
 }
 
 ul img {
-    width: 611px;
-    height: 425px;
+    /*width: 611px;*/
+    /*height: 425px;*/
 }
 
 .log_img {

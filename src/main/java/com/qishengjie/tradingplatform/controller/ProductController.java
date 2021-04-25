@@ -50,7 +50,7 @@ public class ProductController {
     }
 
     @GetMapping("/findById/{id}")
-    public ModelAndView findById(@PathVariable("id") Integer id, HttpSession session) {
+    public ModelAndView findById(@PathVariable("id") String id, HttpSession session) {
         return productService.findById(id, session);
     }
 
