@@ -47,7 +47,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ProductCategoryService productCategoryService;
 
     @Override
-    public ModelAndView list(String type, Integer id, HttpSession session) {
+    public ModelAndView list(String type, String id, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productList");
         modelAndView.addObject("productList",findByCategoryId(type,id));
@@ -83,7 +83,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     public ModelAndView findById(String id, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productDetail");
-        modelAndView.addObject("product",this.baseMapper.selectById(id));
+        modelAndView.addObject("product",productMapper.selectByProductId(id));
         modelAndView.addObject("list",productCategoryService.getAllProductCategoryVO());
         User user = (User)session.getAttribute("user");
         if(user == null){
@@ -95,9 +95,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public List<Product> findByCategoryId(String type, Integer categoryId) {
+    public List<Product> findByCategoryId(String type, String categoryId) {
         Map<String,Object> map = new HashMap<>();
-        map.put("categorylevel"+type+"_id",categoryId);
+        map.put("Category_level_"+type+"_id",categoryId);
         return productMapper.selectByMap(map);
     }
 

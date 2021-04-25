@@ -20,13 +20,13 @@ import java.util.List;
  */
 public interface ProductService extends IService<Product> {
 
-    ModelAndView list(String type,Integer id, HttpSession session);
+    ModelAndView list(String type,String id, HttpSession session);
 
     ModelAndView findByKey(String keyWord,HttpSession session);
 
     ModelAndView findById(String id,HttpSession session);
 
-     List<Product> findByCategoryId(String type, Integer categoryId);
+     List<Product> findByCategoryId(String type, String categoryId);
 
     ResultVO saveBatch(Product product, HttpSession session) ;
 

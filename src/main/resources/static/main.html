@@ -72,7 +72,7 @@
                             <font>￥<span th:text="${productVO.price}">206</span></font> &nbsp;
                         </div>
                         <div class="img">
-                            <a href="/productDetail.html">
+                            <a th:href="'/product/findById/'+${productVO.id}">
                                 <img th:src="'/images/'+${productVO.fileName}" width="185"
                                      height="155" />
                             </a>

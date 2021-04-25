@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <th:block th:include="common.html :: source"></th:block>
+    <link rel="shortcut icon" href="images/favicon.ico" type="favicon.ico">
     <script type="text/javascript" src="/js/productDetail.js"></script>
 </head>
 <body>
@@ -24,15 +25,18 @@
         <div class="pro_des">
             <div class="des_name">
                 <input type="hidden" value="1"  name="entityId" class="n_ipt"/>
-                <p th:text="${product.name}">手机</p>
-                “开业巨惠，北京专柜直供”，不光低价，“真”才靠谱！
+                名称：<p th:text="${product.name}"></p>
+            </div>
+            <div class="des_name">
+                <input type="hidden" value="1"  name="entityId" class="n_ipt"/>
+                描述：<p th:text="${product.description}"></p>
             </div>
             <div class="des_price">
-                本店价格：<b th:text="${product.price}"></b><br/>
+                发布价格：<b th:text="${product.price}"></b><br/>
             </div>
-            <div class="des_price">
-                库存：<b id="stock" th:text="${product.stock}">20</b><br/>
-            </div>
+<!--            <div class="des_price">-->
+<!--                库存：<b id="stock" th:text="${product.stock}">20</b><br/>-->
+<!--            </div>-->
             <div class="des_choice">
                 <span class="fl">型号选择：</span>
                 <ul>
@@ -72,7 +76,7 @@
                 <input type="hidden" id="productId" value="1">
                 <input type="hidden" id="productPrice" value="1">
                 <span class="fl">
-                     <img src="/images/j_car.png" th:onclick="'addCart('+${product.id}+','+${product.price}+')'"/>
+<!--                     <img src="/images/j_car.png" th:onclick="'addCart('+${product.productId}+','+${product.price}+')'"/>-->
                 </span>
             </div>
         </div>

@@ -38,7 +38,7 @@ public class ProductController {
     @GetMapping("/list/{type}/{id}")
     public ModelAndView list(
             @PathVariable("type") String type,
-            @PathVariable("id") Integer id,
+            @PathVariable("id") String id,
             HttpSession session
     ) {
        return productService.list(type, id, session);

@@ -20,13 +20,13 @@
                 <ul class="cate_list">
                     <li th:each="product:${productList}">
                         <div class="name">
-                            <a th:href="'/product/findById/'+${product.product_id}" th:text="${product.name}"></a>
+                            <a th:href="'/product/findById/'+${product.productId}" th:text="${product.name}"></a>
                         </div>
                         <div class="price">
                             <font>￥<span th:text="${product.price}"></span></font> &nbsp;
                         </div>
                         <div class="img">
-                            <a th:href="'/product/findById/'+${product.product_id}">
+                            <a th:href="'/product/findById/'+${product.productId}">
                                 <img th:src="'/images/'+${product.fileName}" width="185"
                                      height="155" />
                             </a>
