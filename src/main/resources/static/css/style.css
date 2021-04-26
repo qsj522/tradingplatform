@@ -3707,7 +3707,7 @@ ul.brand li .name span {
     line-height: 25px;
     overflow: hidden;
     color: #888888;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .des_name p {
@@ -3725,6 +3725,16 @@ ul.brand li .name span {
     font-family: "宋体";
     margin-top: 25px;
     margin-bottom: 20px;
+}
+
+.self_btn{
+    outline: 0;
+    -webkit-appearance: none;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    box-sizing: border-box;
+    background-color: #FFB800;
+    border-radius: 100px
 }
 
 .des_price b {

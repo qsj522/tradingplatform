@@ -23,10 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * <p>
@@ -110,6 +108,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         User user = (User)session.getAttribute("user");
         product.setUserId(user.getUserId());
         product.setIsTrading(0);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = df.format(new Date());
+        product.setCreatedTime(date);
+        product.setCreator(user.getNickname());
         Boolean productStatus = save(product);
         Boolean categoryStatus = false;
         //分类表添加

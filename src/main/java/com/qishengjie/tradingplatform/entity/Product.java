@@ -2,6 +2,8 @@ package com.qishengjie.tradingplatform.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -11,7 +13,7 @@ import lombok.experimental.Accessors;
  * 商品信息表
  * </p>
  *
- * @author Shengjie Qi 
+ * @author Shengjie Qi
  * @since 2021-04-10
  */
 @Data
@@ -73,6 +75,16 @@ public class Product implements Serializable {
      * 商品图片
      */
       private String fileName;
+
+     /**
+     * 发布时间
+     */
+      private String createdTime;
+
+    /**
+     * 发布人
+     */
+      private String creator;
 
 
 }

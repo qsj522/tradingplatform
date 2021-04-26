@@ -56,14 +56,6 @@
                 <option value="">请选择</option>
             </select>
         </div>
-        <div class="layui-input-inline">
-            <select name="quiz3">
-                <option value="">三级分类</option>
-                <option value="西湖区">西湖区</option>
-                <option value="余杭区">余杭区</option>
-                <option value="拱墅区">临安市</option>
-            </select>
-        </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
@@ -174,7 +166,6 @@
         let myForms = $('#product')[0];
         let formDatas = new FormData(myForms);
         formDatas.append("fileName", myFile);
-        console.log(formDatas);
         $.ajax({
             type: "POST",
             url: "/product/save",
