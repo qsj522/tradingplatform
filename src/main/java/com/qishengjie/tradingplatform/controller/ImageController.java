@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author Shengjie Qi
  */
@@ -23,5 +25,11 @@ public class ImageController {
     @ResponseBody
     public ResultVO saveImg(MultipartFile file) {
             return imageService.saveImg(file);
+    }
+
+    @PostMapping("/userImg")
+    @ResponseBody
+    public ResultVO userImg(MultipartFile file, HttpSession session) {
+        return imageService.userImg(file,session);
     }
 }

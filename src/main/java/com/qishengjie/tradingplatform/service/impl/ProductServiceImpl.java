@@ -9,6 +9,7 @@ import com.qishengjie.tradingplatform.entity.ProductCategory;
 import com.qishengjie.tradingplatform.entity.User;
 import com.qishengjie.tradingplatform.mapper.ProductCategoryMapper;
 import com.qishengjie.tradingplatform.mapper.ProductMapper;
+import com.qishengjie.tradingplatform.mapper.UserMapper;
 import com.qishengjie.tradingplatform.service.ProductCategoryService;
 import com.qishengjie.tradingplatform.service.ProductService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -43,6 +44,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ProductCategoryMapper productCategoryMapper;
     @Autowired
     private ProductCategoryService productCategoryService;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public ModelAndView list(String type, String id, HttpSession session) {
@@ -81,14 +84,9 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     public ModelAndView findById(String id, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productDetail");
-        modelAndView.addObject("product",productMapper.selectByProductId(id));
-        modelAndView.addObject("list",productCategoryService.getAllProductCategoryVO());
-        User user = (User)session.getAttribute("user");
-        if(user == null){
-            modelAndView.addObject("cartList",new ArrayList<>());
-        }else{
-//            modelAndView.addObject("cartList",cartService.findAllCartVOByUserId(user.getId()));
-        }
+        Product product = productMapper.selectByProductId(id);
+        modelAndView.addObject("product",product);
+        modelAndView.addObject("productUser",userMapper.selectById(product.getUserId()));
         return modelAndView;
     }
 

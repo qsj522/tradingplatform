@@ -48,51 +48,84 @@
     </div>
 </div>
 
+<form class="layui-form" id="test" style="display:none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">头像</label>
+        <div class="layui-input-block">
+            <input type="text" th:value="${productUser.fileName}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">昵称</label>
+        <div class="layui-input-block">
+            <input type="text" th:value="${productUser.nickname}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block" th:if="${productUser.gender==1}">
+                <input type="radio" name="gender" value="1" checked="checked">&nbsp;男
+        </div>
+        <div class="layui-input-block" th:if="${productUser.gender==2}">
+            <input type="radio" name="gender" value="2" checked="checked">&nbsp;女
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号码</label>
+        <div class="layui-input-block">
+            <input type="text" th:value="${productUser.mobile}">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">信誉等级</label>
+        <div class="layui-input-block">
+            <span th:if="${productUser.creditScore<60}">信用极差</span>
+            <span th:if="${productUser.creditScore<80}and${productUser.creditScore>=60}">信用较差</span>
+            <span th:if="${productUser.creditScore<100}and${productUser.creditScore>=80}">信用一般</span>
+            <span th:if="${productUser.creditScore<120}and${productUser.creditScore>=100}">信用较好</span>
+            <span th:if="${productUser.creditScore>=120}">信用极好</span>
+        </div>
+    </div>
+</form>
+
 <script src="/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 <script>
-    layui.use('layer', function(){
+    layui.use('layer', function () {
         var $ = layui.jquery, layer = layui.layer;
 //触发事件
         var active = {
             want: function () {
-                var that = this;
-                //多窗口模式，层叠置顶
-                layer.open({
-                    type: 2 //此处以iframe举例
-                    , title: '当你选择该窗体时，即会在最顶端'
-                    , area: ['390px', '260px']
-                    , shade: 0
-                    , maxmin: true
-                    , offset: [ //为了演示，随机坐标
-                        Math.random() * ($(window).height() - 300)
-                        , Math.random() * ($(window).width() - 390)
-                    ]
-                    , content: '//layer.layui.com/test/settop.html'
-                    , btn: ['继续弹出', '全部关闭'] //只是为了演示
-                    , yes: function () {
-                        $(that).click();
-                    }
-                    , btn2: function () {
-                        layer.closeAll();
-                    }
 
-                    , zIndex: layer.zIndex //重点1
-                    , success: function (layero) {
-                        layer.want(layero); //重点2
-                    }
+                 layer.confirm('即将为您展示卖家信息，为保障用户权益，平台需要验证您的信用积分，积分小于60将被限制交易。选择继续则验证积分，取消则终止交易。如造成您的不便，我们深感遗憾！', {icon: 3, title:'温馨提示'},function () {
+                    layer.close(layer.index);
+                    layer.open({
+                        type: 1,
+                        area: ['500px', '600px'],
+                        title: 'tianxie'
+                        , content: $("#test"),
+                        shade: 0,
+                        btn: ['我知道了']
+                        , yes: function () {
+                            layer.close(layer.index);
+                        },
+                        cancel: function () {
+                            layer.closeAll();
+                        }
+                    });
                 });
             }
         };
-        $('#layerDemo .layui-btn').on('click', function(){
+        $('#layerDemo .layui-btn').on('click', function () {
             var othis = $(this), method = othis.data('method');
             active[method] ? active[method].call(this, othis) : '';
         });
     });
 
     var backUri = document.referrer;
+
     function back() {
-        window.location.href=backUri;
+        window.location.href = backUri;
     }
 </script>
 
